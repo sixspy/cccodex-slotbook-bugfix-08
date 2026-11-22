@@ -30,7 +30,13 @@ def list_slots(authorization: AuthHeader = None):
     require_user(authorization)
     with connect() as conn:
         rows = conn.execute(
-            "SELECT * FROM slots ORDER BY start_at, code"
+            """SELECT s.*,
+                      (SELECT COALESCE(SUM(seats),0) FROM holds h
+                        WHERE h.slot_id=s.id AND h.status='占位中') AS pending_seats,
+                      (s.capacity - s.booked -
+                        (SELECT COALESCE(SUM(seats),0) FROM holds h
+                          WHERE h.slot_id=s.id AND h.status='占位中')) AS free_seats
+               FROM slots s ORDER BY s.start_at, s.code"""
         ).fetchall()
         return {"items": [dict(r) for r in rows]}
 

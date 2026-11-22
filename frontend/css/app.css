@@ -67,6 +67,9 @@ input, select {
 }
 .err { color: var(--warn); font-size: 0.9rem; }
 .ok { color: var(--ok); }
+.muted { color: #999; }
+.payload { font-size: 0.85rem; color: #555; }
+tr.mark td { background: rgba(46, 160, 67, 0.08); }
 .dash { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-bottom: 1rem; }
 .dash .cell { background: #fff; border: 1px dashed var(--line); padding: 0.7rem; text-align: center; }
 .dash .n { font-size: 1.4rem; font-weight: 700; color: var(--accent); }

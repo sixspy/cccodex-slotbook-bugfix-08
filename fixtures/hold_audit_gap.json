@@ -1,0 +1,10 @@
+{
+  "scenario": "假绿夹具：占位成功但 hold_create 审计缺失（BUGFIX-08）",
+  "slot_code": "S-AM-01",
+  "party_key": "P-FAKEGREEN",
+  "seats": 1,
+  "expected_hold_status": "占位中",
+  "expected_audit_action": "hold_create",
+  "gap": "holds 表存在占位中记录，但 audit_trail 无同事务 hold_create 流水，审计页查无此人，事后追责对不上",
+  "invariant": "任一 holds 行必须能在 audit_trail 找到同事务 hold_create（actor=写者、target=party_key、payload 带 slot/hold_id/seats）"
+}
